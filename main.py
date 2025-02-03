@@ -20,16 +20,29 @@ async def read_books():
     logger.debug('THIS IS DEBUG*******************')
     return BOOKS
 
+# @app.get('/books/{param}')
+# async def read_book(param):
+#     logger.debug('THIS IS DYNAMICALLY PARAM')
+#     return {
+#         'param':param
+#     }
+    
 @app.get('/books/{title}')
 async def read_book_title(title):
     logger.debug('THIS IS BOOKS BY TITLE DEBUG*******************')
     for book in BOOKS:
-        if book['title']==title:
+        if book['title'].lower()==title.lower():
             return book
+
+@app.get('/books/{param}')
+async def read_book(param):
+    return {
+        'param':param
+    }
         
 @app.get('/books-author/{author}')
 async def read_book_author(author):
     logger.debug('THIS IS BOOKS BY AUTHOR DEBUG*******************')
     for book in BOOKS:
-        if book['author']==author:
+        if book['author'].lower()==author.lower():
             return book
